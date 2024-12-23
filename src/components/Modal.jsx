@@ -27,16 +27,19 @@ const Modal = ({ item, onClose, onFavoriteChange }) => {
 
       if (!isFavorite) {
         await axios.post(
-          "http://localhost:8000/pgdb/favoritelist",
+          "https://back.seunghyeon.site:8000/pgdb/favoritelist",
           { id: item.heritageid, type: "heritage" },
           { headers: { Authorization: `Bearer ${token}` } }
         );
         dispatch(addFavorite({ type: "heritage", data: item }));
       } else {
-        await axios.delete("http://localhost:8000/pgdb/favoritelist", {
-          headers: { Authorization: `Bearer ${token}` },
-          data: { id: item.heritageid, type: "heritage" },
-        });
+        await axios.delete(
+          "https://back.seunghyeon.site:8000/pgdb/favoritelist",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+            data: { id: item.heritageid, type: "heritage" },
+          }
+        );
         dispatch(removeFavorite({ type: "heritage", id: item.heritageid }));
       }
 
